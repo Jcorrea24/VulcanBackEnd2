@@ -1,14 +1,21 @@
+import PreferencesSelector.useCases.PreferenceManagerUseCase;
 import feedback.controllers.FeedbackController;//Mario
 import listGames.controllers.ListGamesController; //albani
 import score.controllers.ScoreController; //ROQUE
+import PreferencesSelector.models.Preference; //Julio
 //importe su controlador aqui
 
 
 public class App {
+  /**
+   * @param args
+   * @throws Exception
+   */
   public static void main(String[] args) throws Exception {
     ListGamesController listGamesController = new ListGamesController(); 
     ScoreController scoreController = new ScoreController(); // Instanciar el controlador de puntajes = ROQUE
     FeedbackController feedbackController = new FeedbackController();
+     PreferenceManagerUseCase preferenceManagerUseCase = new PreferenceManagerUseCase(); 
     //Aqui instanciar su propio objeto controller
 
     //######################################################### ALBANY #########################################################
@@ -79,6 +86,54 @@ public class App {
     System.out.println(feedbackOne);
     //######################################################### SERGIO #########################################################
     //######################################################### JULIO #########################################################
-  }
+     System.out.println("Selecciona la Preferencia de tu Materias!");
+      
+        // Create
+        System.out.println("Se procede a crear la preferencia...");
+        String preferenceOne = preferenceManagerUseCase.addPreference("Andres Felipe", "Matematicas", 8);
+        System.out.println(preferenceOne);
+        System.out.println("\n");
 
+        String preferenceTwo = preferenceManagerUseCase.addPreference("Maria Gomez", "Programacion", 10);
+        System.out.println(preferenceTwo);
+        System.out.println("\n");
+
+        String preferenceThree = preferenceManagerUseCase.addPreference("Carlos Ruiz", "Base de Datos", 7);
+        System.out.println(preferenceThree);
+        System.out.println("\n\n");
+
+
+        System.out.println("Consultar todas las preferencias...");
+        // Read
+        String read = preferenceManagerUseCase.showAllPreferences();
+        System.out.println(read);
+        System.out.println("\n\n");
+
+
+        System.out.println("Se ha consultado la preferencia con el indice 1");
+         // Read find by index
+        String read2 = preferenceManagerUseCase.findByIndex(1);
+        System.out.println(read2);
+        System.out.println("\n\n");
+
+
+        System.out.println("Actualizamos la preferencia con indice 0.");
+        // Update
+        String update = preferenceManagerUseCase.updatePreference(0, "Andres Felipe", "Calculo Avanzado", 9);
+        System.out.println(update);
+        System.out.println("\n\n");
+
+
+        System.out.println("Eliminamos la preferencia con indice 2.");
+        // Delete
+        String delete = preferenceManagerUseCase.deletePreference(2);
+        System.out.println(delete);
+        System.out.println("\n\n");
+
+
+        System.out.println("Lista final de preferencias:");
+        String finalList = preferenceManagerUseCase.showAllPreferences();
+        System.out.println(finalList);
+    }
 }
+  
